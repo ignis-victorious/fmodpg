@@ -3,13 +3,17 @@
 #  Import LIBRARIES
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
+
 #  Import FILES
+from src.db.main import init_db
 #  _________________
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     print("server is starting")
+    await init_db()
+
     yield
     print("server is shutting down")
 
